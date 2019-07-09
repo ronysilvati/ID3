@@ -121,6 +121,10 @@ seniors_input = [(input, label)
                  for input, label in inputs if input["level"] == "Senior"]
 
 
+def forest_classify(trees, input):
+    votes = [classify(tree, input) for tree in trees]
+    vote_counts = collections.Counter(votes)
+    return vote_counts.most_common(1)[0][0]
 
 ###################################################
 # Executions
@@ -131,7 +135,6 @@ print("| TREE CONVERTED TO JSON")
 print("===========================================")
 tree = build_tree_id3(inputs)
 print(json.dumps(tree))
-
 
 
 print("===========================================")
@@ -146,6 +149,14 @@ print("===========================================")
 print("| CLASSIFICATION 2 (Most return False")
 print("===========================================")
 print(classify(tree,	{	"level"	:	"Junior",
+                             "lang"	:	"Java",
+                             "tweets"	:	"yes",
+                             "phd"	:	"yes"}	))
+
+print("===========================================")
+print("| CLASSIFICATION 3 - FOREST CLASSIFY (Most return False")
+print("===========================================")
+print(forest_classify([tree],	{	"level"	:	"Junior",
                              "lang"	:	"Java",
                              "tweets"	:	"yes",
                              "phd"	:	"yes"}	))
