@@ -43,7 +43,8 @@ def partition_entropy(subsets):
     #subsets is a list of lists of labeled data
     total_count = sum(len(subset) for subset in subsets)
 
-    return sum(data_entropy(subset) * len(subset) / total_count for subset in subsets)
+    return sum(data_entropy(subset) * len(subset) / total_count
+               for subset in subsets)
 
 def partition_by(inputs, attribute):
     #each input is a pair (attribute_dict, label
@@ -82,7 +83,7 @@ def classify(tree, input):
     return classify(subtree, input)     #and use it to classify the input
 
 
-def build_tree_id3(input, split_candidates=None):
+def build_tree_id3(inputs, split_candidates=None):
     #if this is our first pass,
     #all keys of the first input are split candidates
     if split_candidates is None:
